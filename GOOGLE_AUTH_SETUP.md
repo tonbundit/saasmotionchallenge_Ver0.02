@@ -28,7 +28,20 @@
 5.  ติ๊กเลือก **Skip nonce check** (กรณีใช้กับ Static HTML ทั่วไป)
 6.  กด **Save** เป็นอันเรียบร้อยครับ
 
+## ⚠️ ข้อควรระวัง & ปัญหาที่พบค่อย (Troubleshooting)
+
+### 1. Error: `redirect_uri_mismatch`
+- **สาเหตุ:** ลิงก์ Redirect ใน Google Cloud ไม่ตรงกับที่ Supabase ใช้
+- **วิธีแก้:** ไปที่ Supabase Dashboard > Authentication > Providers > Google แล้วก๊อปปี้ **Callback URL** ไปใส่ในหน้า Google Cloud Console (เมนู Credentials) ในช่อง **Authorized redirect URIs**
+
+### 2. Error: `missing OAuth secret`
+- **สาเหตุ:** ยังไม่ได้ใส่ Client Secret ใน Supabase
+- **วิธีแก้:** นำ **Client Secret** จาก Google Cloud มาใส่ในหน้า Google Provider ของ Supabase แล้วกด **Save**
+
+### 3. Error: `401 Unauthorized` หรือ `JWT expired`
+- **สาเหตุ:** ค่า **SB_KEY** ในโค้ดผิด (ปัจจุบันเป็น `sb_publishable_...` ซึ่งเป็นของ Stripe)
+- **วิธีแก้:** นำ **Anon Key** จริงๆ จากหน้า Project Settings -> API ใน Supabase มาเปลี่ยนในไฟล์ `index.html` ครับ (ปรกติจะขึ้นต้นด้วย `eyJ...`)
+
 ---
-### ⚠️ ข้อควรระวัง
-*   อย่าลืม **Save** หลังจากใส่ค่าใน Supabase
-*   หากรันบน Localhost อย่าลืมใส่ `http://localhost:[port]` ใน Authorized origins ด้วยครับ
+### ⚠️ ข้อควรระวังเพิ่มเติม
+- หากใช้งานผ่าน **Vercel** อย่าลืมไปอัปเดต **Site URL** ใน Supabase เป็น URL ของ Vercel ด้วยนะครับ
