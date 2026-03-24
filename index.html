@@ -2825,8 +2825,13 @@
     function sv() { localStorage.setItem(SK, JSON.stringify(S)); if (user) saveRemote(); }
     async function saveRemote() { try { await sb.from('user_progress').upsert({ user_id: user.id, data: S, updated_at: new Date() }); } catch (e) { console.error('Sync error:', e); } }
     async function loadRemote() {
-      const { data, error } = await sb.from('user_progress').select('data').eq('user_id', user.id).single();
-      if (data?.data) { S = data.data; renderAll(); }
+      try {
+        const { data, error } = await sb.from('user_progress').select('data').eq('user_id', user.id).single();
+        if (error && error.code !== 'PGRST116') throw error; // PGRST116 = no rows (ปกติสำหรับ user ใหม่)
+        if (data?.data) { S = data.data; renderAll(); }
+      } catch (e) {
+        console.error('loadRemote error:', e);
+      }
     }
 
     function setView(v) {
@@ -3190,17 +3195,16 @@
     chkExp(); renderAll(); checkUser();
     sb.auth.onAuthStateChange((event, session) => {
       console.log('Auth Event:', event, session);
-      user = session?.user || null;
-      updateAuthUI();
-      if (user) {
+      if (event === 'SIGNED_IN') {
+        user = session?.user || null;
+        updateAuthUI();
         loadRemote();
         closeAuth();
-        if (window.location.hash) {
-          history.replaceState(null, null, ' ');
-        }
-        if (event === 'SIGNED_IN') {
-          snack('person', 'เข้าสู่ระบบสำเร็จ! 🚀', 'var(--accent)');
-        }
+        if (window.location.hash) history.replaceState(null, null, ' ');
+        snack('person', 'เข้าสู่ระบบสำเร็จ! 🚀', 'var(--accent)');
+      } else if (event === 'SIGNED_OUT') {
+        user = null;
+        updateAuthUI();
       }
     });
     setInterval(chkExp, 30000);
