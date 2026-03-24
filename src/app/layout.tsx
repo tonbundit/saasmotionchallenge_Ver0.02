@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "SaaS Motion — 50 Week Challenge Platform",
-  description: "A high-performance SaaS platform for interactive UI, motion graphics assets, and weekly animation challenges.",
+  title: "SaaS Motion Challenge",
+  description: "50-Week SaaS Motion Graphics Challenge",
 };
 
 export default function RootLayout({
@@ -22,10 +22,8 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
           rel="stylesheet"
         />
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" async></script>
       </head>
       <body>{children}</body>
     </html>
   );
 }
-
