@@ -1,7 +1,6 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
-import { AuthCard } from "@/features/auth/components/AuthCard";
 
 const techStack = [
   { label: "Next.js 16+", color: "var(--color-accent)" },
@@ -15,7 +14,7 @@ const techStack = [
 const stats = [
   { value: "50", label: "WEEKS", sub: "Challenge" },
   { value: "16+", label: "NEXT.JS", sub: "Version" },
-  { value: "∞", label: "MOTION", sub: "Assets" },
+  { value: "500+", label: "MOTION", sub: "Assets" },
 ];
 
 const fadeUp = {
@@ -30,7 +29,7 @@ const fadeUp = {
 export default function Home() {
   return (
     <main className="min-h-screen relative">
-      {/* ═══ TOPBAR ═══ */}
+      {/* --- TOPBAR --- */}
       <motion.nav
         initial={{ y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -59,14 +58,14 @@ export default function Home() {
 
         {/* Pills */}
         <div className="pill pill-accent hidden md:inline-flex">
-          <span style={{ fontSize: 7 }}>●</span> v2.0 LIVE
+          <span style={{ fontSize: 7 }}>—</span> v2.0 LIVE
         </div>
         <div className="pill pill-ghost hidden lg:inline-flex">
           <strong className="text-white">50</strong> Week Challenge
         </div>
       </motion.nav>
 
-      {/* ═══ HERO SECTION ═══ */}
+      {/* --- HERO SECTION --- */}
       <section className="max-w-[1120px] mx-auto px-8 pt-16 pb-12 grid lg:grid-cols-[1fr_200px] gap-8 items-center">
         {/* Left */}
         <div>
@@ -92,7 +91,7 @@ export default function Home() {
           >
             SaaS{" "}
             <em
-              className="not-italic font-extrabold text-[0.58em] rounded-[5px] align-middle mr-1.5 px-3 py-0.5"
+              className="not-italic font-extrabold text-[0.58em] rounded-[5px] align-middle mr-1.5 px-3 py-0.5" 
               style={{
                 fontFamily: "var(--font-sans)",
                 background: "var(--color-accent)",
@@ -115,8 +114,8 @@ export default function Home() {
               color: "rgba(240,240,246,0.6)",
             }}
           >
-            แพลตฟอร์ม SaaS สำหรับเรียนรู้ Motion Graphics & Interactive UI <br />
-            ผ่านการทำ Challenge 50 สัปดาห์ พร้อมระบบ Supabase & Real-time Collaboration
+            Platform สำหรับการเรียนรู้และสร้างสรรค์ SaaS Motion Graphics & Interactive UI <br />
+            ร่วมท้าทาย Challenge 50 สัปดาห์ เพื่อพัฒนาทักษะระดับ Senior
           </motion.p>
         </div>
 
@@ -166,7 +165,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ═══ STATS ROW ═══ */}
+      {/* --- STATS ROW --- */}
       <section className="max-w-[1120px] mx-auto px-8 mb-12">
         <div className="grid grid-cols-3 gap-4">
           {stats.map((s, i) => (
@@ -195,7 +194,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ MAIN CONTENT ═══ */}
+      {/* --- MAIN CONTENT --- */}
       <section className="max-w-[1120px] mx-auto px-8 pb-24 relative z-10">
         <div className="grid lg:grid-cols-[1fr_380px] gap-10">
           {/* Left Column - Feature Cards */}
@@ -215,7 +214,7 @@ export default function Home() {
                 >
                   <div
                     className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity"
-                    style={{ background: `linear-gradient(90deg, ${tech.color}, transparent)` }}
+                    style={{ background: linear-gradient(90deg, \, transparent) }}
                   />
                   <div
                     className="text-[9px] tracking-[0.18em] uppercase mb-2"
@@ -258,62 +257,64 @@ export default function Home() {
                 className="text-[13px] leading-relaxed mb-4"
                 style={{ color: "rgba(240,240,246,0.6)" }}
               >
-                โครงสร้างแบบ Clean Architecture แยก Feature เป็นโมดูลอิสระ
-                รองรับ Vertical Scaling ระดับ Enterprise พร้อม Zod Validation
-                ทุก Server Action
+                โครงสร้างระบบที่เน้นความยืดหยุ่นและการขยายตัว รองรับทั้ง Web และ Desktop Application ด้วย Next.js 16 และ Zod Validation
               </p>
-
-              <div className="flex flex-wrap gap-2">
-                {["src/features/", "src/components/ui/", "src/lib/", "prisma/"].map((path) => (
-                  <span key={path} className="tag">{path}</span>
+              
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { title: "Lottie Files", desc: "After Effects to .lottie", accent: "var(--color-accent2)" },
+                  { title: "Rive Interactive", desc: "State Machine Driven UI", accent: "var(--color-accent4)" },
+                  { title: "Framer Motion", desc: "Micro-interactions", accent: "var(--color-accent3)" },
+                  { title: "Prisma Client", desc: "Type-safe DB Access", accent: "var(--color-accent)" },
+                ].map((feat, i) => (
+                  <motion.div
+                    key={feat.title}
+                    custom={i}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeUp}
+                    className="glass-card p-5"
+                  >
+                    <div
+                      className="absolute top-0 left-0 right-0 h-[2px]"
+                      style={{ background: linear-gradient(90deg, \, transparent) }}
+                    />
+                    <div
+                      className="text-[9px] tracking-[0.18em] uppercase mb-1"
+                      style={{ fontFamily: "var(--font-mono)", color: feat.accent }}
+                    >
+                      — INTEGRATED
+                    </div>
+                    <div className="text-[15px] italic mb-1" style={{ fontFamily: "var(--font-serif)" }}>
+                      {feat.title}
+                    </div>
+                    <div
+                      className="text-[11px]"
+                      style={{ fontFamily: "var(--font-mono)", color: "var(--color-muted)" }}
+                    >
+                      {feat.desc}
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
-
-            {/* Feature highlights */}
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { title: "Lottie Animation", desc: "dotlottie-react รองรับไฟล์ .lottie", accent: "var(--color-accent2)" },
-                { title: "Rive Interactive", desc: "react-canvas สำหรับ Real-time", accent: "var(--color-accent4)" },
-                { title: "Framer Motion", desc: "Micro-interactions & Transitions", accent: "var(--color-accent3)" },
-                { title: "Prisma + PostgreSQL", desc: "Type-safe Database Access", accent: "var(--color-accent)" },
-              ].map((feat, i) => (
-                <motion.div
-                  key={feat.title}
-                  custom={i}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={fadeUp}
-                  className="glass-card p-5"
-                >
-                  <div
-                    className="absolute top-0 left-0 right-0 h-[2px]"
-                    style={{ background: `linear-gradient(90deg, ${feat.accent}, transparent)` }}
-                  />
-                  <div
-                    className="text-[9px] tracking-[0.18em] uppercase mb-1"
-                    style={{ fontFamily: "var(--font-mono)", color: feat.accent }}
-                  >
-                    ● INTEGRATED
-                  </div>
-                  <div className="text-[15px] italic mb-1" style={{ fontFamily: "var(--font-serif)" }}>
-                    {feat.title}
-                  </div>
-                  <div
-                    className="text-[11px]"
-                    style={{ fontFamily: "var(--font-mono)", color: "var(--color-muted)" }}
-                  >
-                    {feat.desc}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
           </div>
 
-          {/* Right Column - Auth Card */}
+          {/* Right Column - Placeholder */}
           <div className="flex flex-col gap-6">
-            <AuthCard />
+            <div className="glass-card p-8 text-center">
+              <div className="text-[10px] tracking-[0.2em] font-mono text-accent mb-4" style={{ color: "var(--color-accent)" }}>// ACCESS_RESTRICTED</div>
+              <h3 className="font-serif italic text-2xl mb-6">Auth Fusion Active</h3>
+              <p className="text-xs text-muted font-mono leading-relaxed mb-8" style={{ color: "var(--color-muted)" }}>
+                Legacy V1 authentication layer has been merged. 
+                System re-calibration in progress.
+              </p>
+              <div className="w-full h-[1px] bg-border mb-8" style={{ background: "rgba(255,255,255,0.06)" }} />
+              <div className="btn-accent w-full justify-center opacity-50 cursor-not-allowed">
+                Initializing...
+              </div>
+            </div>
 
             {/* Status card */}
             <motion.div
@@ -364,7 +365,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ FOOTER MARQUEE ═══ */}
+      {/* --- FOOTER MARQUEE --- */}
       <footer
         className="fixed bottom-0 left-0 right-0 z-50 px-8 py-3 flex items-center overflow-hidden whitespace-nowrap"
         style={{
