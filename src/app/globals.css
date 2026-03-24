@@ -63,6 +63,17 @@ body::before {
   pointer-events: none;
 }
 
+.ms {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1;
+  display: inline-block;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
 .topbar {
   position: sticky;
   top: 0;
@@ -119,6 +130,36 @@ body::before {
   background: rgba(255, 255, 255, .05);
   border: 1px solid var(--border2);
   color: var(--text2);
+}
+
+.user-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 4px 4px 12px;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid var(--border2);
+  border-radius: 20px;
+  font-size: 11px;
+  font-family: var(--mono);
+}
+
+.user-logout {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, .08);
+  color: var(--text2);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background .15s;
+}
+
+.user-logout:hover {
+  background: rgba(234, 67, 53, .15);
+  color: var(--red);
 }
 
 .hero {
@@ -217,12 +258,25 @@ body::before {
   position: relative;
   overflow: hidden;
   transition: all .22s;
+  padding: 18px;
 }
 
 .wcard:hover {
   border-color: var(--border2);
   transform: translateY(-2px);
   box-shadow: 0 8px 28px rgba(0, 0, 0, .35);
+}
+
+.wcard.cl {
+  opacity: .42;
+  cursor: not-allowed;
+}
+
+.wc-top {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 11px;
 }
 
 .wc-num {
@@ -233,11 +287,55 @@ body::before {
   text-transform: uppercase;
 }
 
+.wc-bdg {
+  font-family: var(--mono);
+  font-size: 9px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 700;
+  margin-left: auto;
+}
+
+.bc {
+  background: rgba(232, 255, 71, .14);
+  color: var(--accent);
+  border: 1px solid rgba(232, 255, 71, .28);
+}
+
+.bl {
+  background: rgba(255, 255, 255, .04);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
 .wc-tt {
   font-family: var(--serif);
   font-size: 15px;
   font-style: italic;
   line-height: 1.25;
+}
+
+.wc-bar {
+  height: 3px;
+  background: rgba(255, 255, 255, .07);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.wc-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--green);
+  transition: width .6s;
+}
+
+.wc-foot {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .ac {
