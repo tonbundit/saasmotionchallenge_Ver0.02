@@ -1,67 +1,391 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { AuthCard } from "@/features/auth/components/AuthCard";
+
+const techStack = [
+  { label: "Next.js 16+", color: "var(--color-accent)" },
+  { label: "TypeScript", color: "var(--color-accent3)" },
+  { label: "Prisma ORM", color: "var(--color-accent4)" },
+  { label: "Framer Motion", color: "var(--color-accent2)" },
+  { label: "Lottie / Rive", color: "var(--color-accent)" },
+  { label: "Supabase Auth", color: "var(--color-accent3)" },
+];
+
+const stats = [
+  { value: "50", label: "WEEKS", sub: "Challenge" },
+  { value: "16+", label: "NEXT.JS", sub: "Version" },
+  { value: "∞", label: "MOTION", sub: "Assets" },
+];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.1, duration: 0.5, ease: [0.4, 0, 0.2, 1] },
+  }),
+};
 
 export default function Home() {
   return (
-    <main className="min-h-screen relative overflow-hidden bg-white selection:bg-accent selection:text-black">
-      {/* Grid Pattern Background */}
-      <div className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none" 
-        style={{ backgroundImage: 'radial-gradient(#000 1.5px, transparent 0)', backgroundSize: '40px 40px' }} 
-      />
-      
-      {/* Floating Brutalist shapes */}
-      <div className="absolute -top-20 -left-20 w-80 h-80 bg-accent border-[6px] border-black -rotate-12 z-0 shadow-[10px_10px_0px_0px_#000]" />
-      <div className="absolute top-[60%] -right-20 w-80 h-80 bg-black rotate-12 z-0 hidden lg:block" />
+    <main className="min-h-screen relative">
+      {/* ═══ TOPBAR ═══ */}
+      <motion.nav
+        initial={{ y: -60, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="sticky top-0 z-[200] h-[58px] flex items-center px-7 gap-4"
+        style={{
+          background: "rgba(7, 7, 15, 0.9)",
+          backdropFilter: "blur(24px)",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
+        }}
+      >
+        {/* Logo */}
+        <div className="flex items-center gap-2.5 font-extrabold text-[15px] tracking-tight">
+          <div
+            className="w-7 h-7 rounded-lg flex items-center justify-center text-[11px] font-black"
+            style={{ background: "var(--color-accent)", color: "#07070f" }}
+          >
+            SM
+          </div>
+          <span>
+            SaaS<span style={{ color: "var(--color-accent)" }}>Motion</span>
+          </span>
+        </div>
 
-      {/* Hero Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-20 lg:py-0">
-        <div className="max-w-7xl w-full grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-          
-          {/* Left Column - Copy */}
-          <div className="space-y-10 order-2 lg:order-1">
-            <div className="inline-block px-4 py-2 bg-black text-accent font-black uppercase tracking-tighter text-sm">
-              SaaS Boilerplate v1.0 // Minimal Brutalism
+        <div className="flex-1" />
+
+        {/* Pills */}
+        <div className="pill pill-accent hidden md:inline-flex">
+          <span style={{ fontSize: 7 }}>●</span> v2.0 LIVE
+        </div>
+        <div className="pill pill-ghost hidden lg:inline-flex">
+          <strong className="text-white">50</strong> Week Challenge
+        </div>
+      </motion.nav>
+
+      {/* ═══ HERO SECTION ═══ */}
+      <section className="max-w-[1120px] mx-auto px-8 pt-16 pb-12 grid lg:grid-cols-[1fr_200px] gap-8 items-center">
+        {/* Left */}
+        <div>
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="section-label mb-4"
+          >
+            50 WEEK CHALLENGE PLATFORM
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.7 }}
+            className="leading-[1.0] tracking-[-0.03em] mb-4"
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontSize: "clamp(44px, 5.5vw, 72px)",
+              fontStyle: "italic",
+            }}
+          >
+            SaaS{" "}
+            <em
+              className="not-italic font-extrabold text-[0.58em] rounded-[5px] align-middle mr-1.5 px-3 py-0.5"
+              style={{
+                fontFamily: "var(--font-sans)",
+                background: "var(--color-accent)",
+                color: "#07070f",
+              }}
+            >
+              Motion
+            </em>
+            <br />
+            Graphics
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="text-xs leading-[1.9] max-w-lg"
+            style={{
+              fontFamily: "var(--font-mono)",
+              color: "rgba(240,240,246,0.6)",
+            }}
+          >
+            แพลตฟอร์ม SaaS สำหรับเรียนรู้ Motion Graphics & Interactive UI <br />
+            ผ่านการทำ Challenge 50 สัปดาห์ พร้อมระบบ Supabase & Real-time Collaboration
+          </motion.p>
+        </div>
+
+        {/* Right - Progress Ring */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.6, type: "spring" }}
+          className="flex flex-col items-center gap-2"
+        >
+          <svg width="140" height="140" viewBox="0 0 140 140">
+            <circle
+              cx="70" cy="70" r="56"
+              fill="none"
+              stroke="rgba(255,255,255,0.07)"
+              strokeWidth="11"
+            />
+            <motion.circle
+              cx="70" cy="70" r="56"
+              fill="none"
+              stroke="var(--color-accent)"
+              strokeWidth="11"
+              strokeLinecap="round"
+              strokeDasharray="351.86"
+              initial={{ strokeDashoffset: 351.86 }}
+              animate={{ strokeDashoffset: 351.86 * 0.85 }}
+              transition={{ delay: 0.8, duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
+              style={{ transform: "rotate(-90deg)", transformOrigin: "center" }}
+            />
+            <text
+              x="70" y="64"
+              textAnchor="middle"
+              fill="var(--foreground)"
+              style={{ fontFamily: "var(--font-mono)", fontSize: 28, fontWeight: 700 }}
+            >
+              15%
+            </text>
+            <text
+              x="70" y="84"
+              textAnchor="middle"
+              fill="var(--color-muted)"
+              style={{ fontFamily: "var(--font-mono)", fontSize: 9, letterSpacing: "0.15em" }}
+            >
+              PROGRESS
+            </text>
+          </svg>
+        </motion.div>
+      </section>
+
+      {/* ═══ STATS ROW ═══ */}
+      <section className="max-w-[1120px] mx-auto px-8 mb-12">
+        <div className="grid grid-cols-3 gap-4">
+          {stats.map((s, i) => (
+            <motion.div
+              key={s.label}
+              custom={i}
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              className="glass-card p-5 text-center"
+            >
+              <div
+                className="text-2xl font-extrabold italic"
+                style={{ fontFamily: "var(--font-serif)", color: "var(--color-accent)" }}
+              >
+                {s.value}
+              </div>
+              <div
+                className="text-[9px] tracking-[0.18em] uppercase mt-1"
+                style={{ fontFamily: "var(--font-mono)", color: "var(--color-muted)" }}
+              >
+                {s.label}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══ MAIN CONTENT ═══ */}
+      <section className="max-w-[1120px] mx-auto px-8 pb-24 relative z-10">
+        <div className="grid lg:grid-cols-[1fr_380px] gap-10">
+          {/* Left Column - Feature Cards */}
+          <div>
+            {/* Tech Stack */}
+            <div className="section-label mb-4">TECH STACK</div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-10">
+              {techStack.map((tech, i) => (
+                <motion.div
+                  key={tech.label}
+                  custom={i}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={fadeUp}
+                  className="glass-card p-4 group cursor-pointer"
+                >
+                  <div
+                    className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity"
+                    style={{ background: `linear-gradient(90deg, ${tech.color}, transparent)` }}
+                  />
+                  <div
+                    className="text-[9px] tracking-[0.18em] uppercase mb-2"
+                    style={{ fontFamily: "var(--font-mono)", color: tech.color }}
+                  >
+                    MODULE
+                  </div>
+                  <div className="text-[14px] font-semibold">{tech.label}</div>
+                </motion.div>
+              ))}
             </div>
-            
-            <h1 className="text-7xl xl:text-8xl font-black uppercase italic tracking-tighter leading-[0.85] text-black">
-              SOLO<br/>
-              STUDIO<br/>
-              <span className="text-white drop-shadow-[-3px_-3px_0px_#000] drop-shadow-[3px_3px_0px_#000] drop-shadow-[3px_-3px_0px_#000] drop-shadow-[-3px_3px_0px_#000]">BOILER</span>
-              <br/>PLATE
-            </h1>
-            
-            <p className="max-w-lg text-xl font-bold tracking-tight text-zinc-900 border-l-[6px] border-black pl-8 leading-relaxed">
-              A high-performance codebase for architects who build serious motion graphics platforms. Featuring Clean Architecture, Feature-based Modular Structure, and Next.js power.
-            </p>
-            
-            <div className="flex flex-wrap gap-4 pt-6">
-              <div className="px-6 py-3 border-4 border-black font-black uppercase bg-white">
-                Next.js App Router
+
+            {/* Architecture Info */}
+            <div className="divider mb-8" />
+            <div className="section-label mb-4">ARCHITECTURE</div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="glass-card p-6 mb-6"
+              style={{ borderColor: "rgba(232, 255, 71, 0.22)", background: "linear-gradient(135deg, rgba(232, 255, 71, 0.07) 0%, rgba(0, 212, 255, 0.04) 100%)" }}
+            >
+              <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: "linear-gradient(90deg, var(--color-accent), var(--color-accent3))" }} />
+              <div className="flex items-center gap-3 mb-4">
+                <span
+                  className="px-3 py-1 rounded text-[10px] tracking-[0.18em] uppercase font-bold"
+                  style={{ fontFamily: "var(--font-mono)", background: "var(--color-accent)", color: "#07070f" }}
+                >
+                  CLEAN ARCH
+                </span>
+                <span
+                  className="text-[24px] italic flex-1 leading-tight"
+                  style={{ fontFamily: "var(--font-serif)" }}
+                >
+                  Feature-based Modular Structure
+                </span>
               </div>
-              <div className="px-6 py-3 border-4 border-black font-black uppercase bg-white">
-                Prisma + Postgres
+              <p
+                className="text-[13px] leading-relaxed mb-4"
+                style={{ color: "rgba(240,240,246,0.6)" }}
+              >
+                โครงสร้างแบบ Clean Architecture แยก Feature เป็นโมดูลอิสระ
+                รองรับ Vertical Scaling ระดับ Enterprise พร้อม Zod Validation
+                ทุก Server Action
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                {["src/features/", "src/components/ui/", "src/lib/", "prisma/"].map((path) => (
+                  <span key={path} className="tag">{path}</span>
+                ))}
               </div>
-              <div className="px-6 py-3 border-4 border-black font-black uppercase bg-white">
-                Strict TypeScript
-              </div>
+            </motion.div>
+
+            {/* Feature highlights */}
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { title: "Lottie Animation", desc: "dotlottie-react รองรับไฟล์ .lottie", accent: "var(--color-accent2)" },
+                { title: "Rive Interactive", desc: "react-canvas สำหรับ Real-time", accent: "var(--color-accent4)" },
+                { title: "Framer Motion", desc: "Micro-interactions & Transitions", accent: "var(--color-accent3)" },
+                { title: "Prisma + PostgreSQL", desc: "Type-safe Database Access", accent: "var(--color-accent)" },
+              ].map((feat, i) => (
+                <motion.div
+                  key={feat.title}
+                  custom={i}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={fadeUp}
+                  className="glass-card p-5"
+                >
+                  <div
+                    className="absolute top-0 left-0 right-0 h-[2px]"
+                    style={{ background: `linear-gradient(90deg, ${feat.accent}, transparent)` }}
+                  />
+                  <div
+                    className="text-[9px] tracking-[0.18em] uppercase mb-1"
+                    style={{ fontFamily: "var(--font-mono)", color: feat.accent }}
+                  >
+                    ● INTEGRATED
+                  </div>
+                  <div className="text-[15px] italic mb-1" style={{ fontFamily: "var(--font-serif)" }}>
+                    {feat.title}
+                  </div>
+                  <div
+                    className="text-[11px]"
+                    style={{ fontFamily: "var(--font-mono)", color: "var(--color-muted)" }}
+                  >
+                    {feat.desc}
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
-          
-          {/* Right Column - Auth Card Demo */}
-          <div className="flex justify-center order-1 lg:order-2">
+
+          {/* Right Column - Auth Card */}
+          <div className="flex flex-col gap-6">
             <AuthCard />
+
+            {/* Status card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="glass-card p-5"
+            >
+              <div
+                className="text-[9px] tracking-[0.18em] uppercase mb-3"
+                style={{ fontFamily: "var(--font-mono)", color: "var(--color-accent3)" }}
+              >
+                // SYSTEM STATUS
+              </div>
+              {[
+                { label: "Build", status: "Operational", color: "#34A853" },
+                { label: "Database", status: "Connected", color: "#34A853" },
+                { label: "Auth", status: "Ready", color: "var(--color-accent)" },
+                { label: "Motion Engine", status: "Active", color: "var(--color-accent3)" },
+              ].map((item) => (
+                <div
+                  key={item.label}
+                  className="flex items-center justify-between py-2"
+                  style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}
+                >
+                  <span
+                    className="text-[11px]"
+                    style={{ fontFamily: "var(--font-mono)", color: "var(--color-muted)" }}
+                  >
+                    {item.label}
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <span
+                      className="w-[6px] h-[6px] rounded-full"
+                      style={{ background: item.color, animation: "blink 2s infinite" }}
+                    />
+                    <span
+                      className="text-[10px] font-bold"
+                      style={{ fontFamily: "var(--font-mono)", color: item.color }}
+                    >
+                      {item.status}
+                    </span>
+                  </span>
+                </div>
+              ))}
+            </motion.div>
           </div>
-          
         </div>
-      </div>
-      
-      {/* Footer Status Bar */}
-      <footer className="fixed bottom-0 left-0 right-0 z-50 bg-[#E8FF47] border-t-[4px] border-black px-8 py-3 flex justify-between items-center overflow-hidden whitespace-nowrap">
+      </section>
+
+      {/* ═══ FOOTER MARQUEE ═══ */}
+      <footer
+        className="fixed bottom-0 left-0 right-0 z-50 px-8 py-3 flex items-center overflow-hidden whitespace-nowrap"
+        style={{
+          background: "rgba(7, 7, 15, 0.95)",
+          backdropFilter: "blur(16px)",
+          borderTop: "1px solid rgba(232, 255, 71, 0.15)",
+        }}
+      >
         <div className="flex gap-12 animate-marquee">
-          <span className="text-sm font-black uppercase tracking-widest italic">BUILD SCALE MOTION // ZERO SECRET LEAKS // OPTIMIZED FOR FRAME-RATE // TYPE-SAFE ARCHITECTURE // STUDIO SAAS PLATFORM // </span>
-          <span className="text-sm font-black uppercase tracking-widest italic">BUILD SCALE MOTION // ZERO SECRET LEAKS // OPTIMIZED FOR FRAME-RATE // TYPE-SAFE ARCHITECTURE // STUDIO SAAS PLATFORM // </span>
-        </div>
-        <div className="hidden lg:flex bg-black text-white px-4 py-1 text-xs font-black uppercase">
-          Status: Operational
+          <span
+            className="text-[10px] font-bold uppercase tracking-[0.2em] italic"
+            style={{ fontFamily: "var(--font-mono)", color: "var(--color-accent)" }}
+          >
+            SAAS MOTION // 50 WEEK CHALLENGE // LOTTIE & RIVE READY // CLEAN ARCHITECTURE // TYPE-SAFE // FRAME-RATE OPTIMIZED // SUPABASE AUTH //
+          </span>
+          <span
+            className="text-[10px] font-bold uppercase tracking-[0.2em] italic"
+            style={{ fontFamily: "var(--font-mono)", color: "var(--color-accent)" }}
+          >
+            SAAS MOTION // 50 WEEK CHALLENGE // LOTTIE & RIVE READY // CLEAN ARCHITECTURE // TYPE-SAFE // FRAME-RATE OPTIMIZED // SUPABASE AUTH //
+          </span>
         </div>
       </footer>
     </main>
