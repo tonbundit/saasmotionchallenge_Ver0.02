@@ -2691,12 +2691,6 @@
         ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[match])
       );
     }
-    function _s(str) {
-      if (!str) return '';
-      return String(str).replace(/[&<>'"]/g, match =>
-        ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[match])
-      );
-    }
       const brandData = {
         'OpenAI': { domain: 'openai.com', col: 'Black & Teal (#10A37F)', swatches: ['#10A37F', '#000000', '#FFFFFF', '#ECECEC', '#565869'] },
         'Stripe': { domain: 'stripe.com', col: 'Blurple (#635BFF)', swatches: ['#635BFF', '#0A2540', '#00D4FF', '#FFDFDB', '#F6F9FC'] },
@@ -3195,9 +3189,19 @@
     }
     chkExp(); renderAll(); checkUser();
     sb.auth.onAuthStateChange((event, session) => {
+      console.log('Auth Event:', event, session);
       user = session?.user || null;
       updateAuthUI();
-      if (user) loadRemote();
+      if (user) {
+        loadRemote();
+        closeAuth();
+        if (window.location.hash) {
+          history.replaceState(null, null, ' ');
+        }
+        if (event === 'SIGNED_IN') {
+          snack('person', 'เข้าสู่ระบบสำเร็จ! 🚀', 'var(--accent)');
+        }
+      }
     });
     setInterval(chkExp, 30000);
 
