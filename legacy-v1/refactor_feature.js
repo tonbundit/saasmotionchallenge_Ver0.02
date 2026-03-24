@@ -1,5 +1,5 @@
 const fs = require('fs');
-const file = "c:\\saas-app-animation-challenge\\saas-motion-supabase.html";
+const file = "index.html"; 
 let content = fs.readFileSync(file, 'utf8');
 
 // 1. Add CSS
@@ -14,14 +14,14 @@ if (!content.includes('.wc-desc')) {
 }
 
 // 2. Modify WD array
-content = content.replace(/\\{t:'([^']+)',tags:\\[(.*?)\\],days:\\[(.*?)\\]\\}/g, function(match, t, tags, days) {
+content = content.replace(/{t:'([^']+)',tags:\[(.*?)\],days:\[(.*?)\]}/g, function(match, t, tags, days) {
     return "{t:'" + t + "',tags:[" + tags + "],desc:'เรียนรู้และฝึกฝนการทำผลงาน " + t + " พัฒนาทักษะด้าน Motion Design',days:[" + days + "]}";
 });
 
 // 3. Update renderGrid
 content = content.replace(
-    /<div class="wc-tags">\\$\\{data\\.tags\\.slice\\(0,2\\)\\.map\\(t=>`<span class="wc-tag">\\$\\{t\\}<\\/span>`\\)\\.join\\(''\\)\\}<\\/div>/g,
-    '<div class="wc-tags">${data.tags.slice(0,2).map(t=>`<span class="wc-tag">${_s(t)}</span>`).join(\'\')}</div><div class="wc-desc">${_s(data.desc)}</div>'
+    /<div class="wc-tags">\$\{data\.tags\.slice\(0, ?2\)\.map\(t ?=> ?`<span class="wc-tag">\$\{t\}<\/span>`\)\.join\(''\)\}<\/div>/g,
+    '<div class="wc-tags">${data.tags.slice(0, 2).map(t => `<span class="wc-tag">${_s(t)}</span>`).join(\'\')}</div><div class="wc-desc">${_s(data.desc)}</div>'
 );
 
 // 4. Update renderBanner
@@ -35,7 +35,7 @@ const newBanner = `document.getElementById('actt').textContent=data.t;
   }
   document.getElementById('acdesc').textContent = data.desc;`;
 
-content = content.replace(/document\\.getElementById\\('actt'\\)\\.textContent=data\\.t;/g, newBanner);
+content = content.replace(/document\.getElementById\('actt'\)\.textContent=data\.t;/g, newBanner);
 
 // 5. Update inside panel
 const newPanel = `document.getElementById('pntt').textContent=data.t;
@@ -49,7 +49,7 @@ const newPanel = `document.getElementById('pntt').textContent=data.t;
   }
   pndesc.textContent = data.desc;`;
 
-content = content.replace(/document\\.getElementById\\('pntt'\\)\\.textContent=data\\.t;/g, newPanel);
+content = content.replace(/document\.getElementById\('pntt'\)\.textContent=data\.t;/g, newPanel);
 
 fs.writeFileSync(file, content, 'utf8');
 console.log("Added descriptions to UI successfully");

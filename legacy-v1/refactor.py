@@ -1,8 +1,8 @@
 import os
 import json
 
-src_file = r"c:\saas-app-animation-challenge\saas-motion-supabase.html"
-dest_file = r"c:\saas-app-animation-challenge\refactored_saas_motion_supabase.html"
+src_file = r"c:\saas-app-animation-challenge\index.html"
+dest_file = r"c:\saas-app-animation-challenge\index_refactored.html"
 
 with open(src_file, 'r', encoding='utf-8') as f:
     lines = f.readlines()
