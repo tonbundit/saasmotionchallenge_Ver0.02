@@ -1,0 +1,226 @@
+<body>
+  <header class="topbar">
+    <div class="logo">
+      <div class="logo-icon">
+        <img src="Logo.svg" alt="SaaS Motion Logo">
+      </div>
+      SaaS<span>Motion</span>
+    </div>
+    <div class="tb-sp"></div>
+    <button class="lang-btn" onclick="toggleLang()">
+      <span class="ms">language</span>
+      <span id="lang-label">EN</span>
+    </button>
+    <div class="pill pill-s"><span class="ms" style="font-size:14px;">local_fire_department</span><span id="sv">0</span>
+      <span data-i18n="streak_unit">week streak</span></div>
+    <div class="pill pill-w"><span class="ms" style="font-size:14px;">calendar_view_week</span><strong
+        id="dv">0</strong>&nbsp;/ 50 <span data-i18n="weeks_unit">weeks</span></div>
+    <button class="bell-btn" id="bell" onclick="toggleNp()"><span class="ms"
+        style="font-size:20px;">notifications</span>
+      <div class="bell-dot" id="bdot"></div>
+    </button>
+  </header>
+  <div class="action-bar">
+    <button class="ab-btn on" id="ab-ch" onclick="setView('ch')"><span
+        class="ms">home_app_logo</span><span data-i18n="challenges_tab">Challenges</span></button>
+    <button class="ab-btn" id="ab-gl" onclick="setView('gl')"><span
+        class="ms">auto_awesome_motion</span><span data-i18n="gallery_tab">Gallery</span></button>
+    <button class="ab-btn" id="ab-pr" onclick="setView('pr')"><span class="ms">person</span><span data-i18n="profile_tab">Profile</span></button>
+  </div>
+
+  <div id="view-ch" class="view-section on">
+    <section class="hero">
+      <div>
+        <div class="hero-eye" data-i18n="hero_eye">50-Week Challenge · SaaS Motion Design</div>
+        <h1 class="hero-h1"><em data-i18n="hero_h1_1">SaaS Motion</em> <span data-i18n="hero_h1_2">Graphics Challenge</span></h1>
+        <p class="hero-sub" data-i18n="hero_sub">New prompt weekly · 7-day deadline · Auto-unlock 5-day breakdown · Timer · Recap work · 50 weeks complete</p>
+      </div>
+      <div class="ring-wrap">
+        <svg class="ring-svg" viewBox="0 0 130 130">
+          <circle class="ring-track" cx="65" cy="65" r="56" />
+          <circle class="ring-fill" id="rf" cx="65" cy="65" r="56" />
+          <text x="65" y="61" text-anchor="middle" fill="#f0f0f6" font-size="22" font-family="'Syne',sans-serif"
+            font-weight="800" id="rpct">0%</text>
+          <text x="65" y="76" text-anchor="middle" fill="#52526e" font-size="9" font-family="'DM Mono',monospace"
+            letter-spacing="2" data-i18n="complete_label">COMPLETE</text>
+        </svg>
+        <div class="ring-lbl" data-i18n="overall_progress">Overall Progress</div>
+      </div>
+    </section>
+    <main class="main">
+      <div class="ac" id="ac">
+        <div class="ac-in">
+          <div class="ac-top">
+            <div class="ac-badge"><span class="ms" style="font-size:12px;">bolt</span><span id="aclbl" data-i18n="week_active">WEEK 01 —
+                ACTIVE</span></div>
+            <div class="ac-title" id="actt">—</div>
+            <div class="ac-cd" id="accd">
+              <div class="cd-seg">
+                <div class="cd-n" id="cdd">7</div>
+                <div class="cd-u" data-i18n="day_unit">Days</div>
+              </div>
+              <div class="cd-seg">
+                <div class="cd-n" id="cdh">00</div>
+                <div class="cd-u" data-i18n="hour_unit">Hrs.</div>
+              </div>
+              <div class="cd-seg">
+                <div class="cd-n" id="cdm">00</div>
+                <div class="cd-u" data-i18n="min_unit">Min.</div>
+              </div>
+              <div class="cd-seg">
+                <div class="cd-n" id="cds">00</div>
+                <div class="cd-u" data-i18n="sec_unit">Sec.</div>
+              </div>
+            </div>
+          </div>
+          <div class="ac-days" id="acdays"></div>
+          <div class="ac-act">
+            <button class="btn-a" id="acopen" data-i18n="open_challenge">Open this week's prompt</button>
+            <button class="btn-g" id="acdone" data-i18n="done_challenge">Mark all complete</button>
+            <div class="ac-prog"><span class="ms" style="font-size:13px;">check_circle</span><span
+                id="acprog">0/5</span> <span data-i18n="days_done">days done</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec-hd">
+        <div class="sec-tt"><span class="ms" style="font-size:13px;">grid_view</span><span data-i18n="all_weeks">50 Weeks</span></div>
+        <div class="ftabs">
+          <button class="ftab on" onclick="setF('all',this)" data-i18n="all_tab">All</button>
+          <button class="ftab" onclick="setF('current',this)" data-i18n="current_tab">Current</button>
+          <button class="ftab" onclick="setF('done',this)" data-i18n="done_tab">Done</button>
+          <button class="ftab" onclick="setF('expired',this)" data-i18n="expired_tab">Expired</button>
+        </div>
+      </div>
+      <div class="wgrid" id="wg"></div>
+    </main>
+  </div>
+
+  <div id="view-gl" class="view-section">
+    <section class="hero" style="padding-bottom:20px;">
+      <div>
+        <div class="hero-eye" style="color:var(--accent)" data-i18n="gallery_eye">Showcase · Hall of Fame</div>
+        <h1 class="hero-h1" data-i18n="gallery_h1">Work Gallery</h1>
+        <p class="hero-sub" data-i18n="gallery_sub">Revisit the challenges you successfully conquered each week.</p>
+      </div>
+    </section>
+    <main class="main">
+      <div class="g-grid" id="g-grid"></div>
+    </main>
+  </div>
+
+  <div id="view-pr" class="view-section">
+    <section class="hero" style="padding-bottom:20px;">
+      <div>
+        <div class="hero-eye" style="color:var(--accent4)" data-i18n="profile_eye">User Stats · Achievements</div>
+        <h1 class="hero-h1" data-i18n="profile_h1">My Profile</h1>
+        <p class="hero-sub" id="pr-email" data-i18n="profile_login_msg">Please login to view your personal stats</p>
+      </div>
+    </section>
+    <main class="main">
+      <div class="pr-stats">
+        <div class="pr-stat-card">
+          <div class="pr-stat-n" id="stat-done">0</div>
+          <div class="pr-stat-l" data-i18n="weeks_done_stat">Weeks Done</div>
+        </div>
+        <div class="pr-stat-card">
+          <div class="pr-stat-n" id="stat-streak">0</div>
+          <div class="pr-stat-l" data-i18n="current_streak_stat">Current Streak</div>
+        </div>
+        <div class="pr-stat-card">
+          <div class="pr-stat-n" id="stat-hours">0h</div>
+          <div class="pr-stat-l" data-i18n="total_time_stat">Total Time</div>
+        </div>
+      </div>
+      <div class="sec-hd">
+        <div class="sec-tt"><span class="ms"
+            style="font-size:13px;color:var(--accent4)">workspace_premium</span><span data-i18n="achievements_title">Achievements</span></div>
+      </div>
+      <div class="ach-grid" id="ach-grid"></div>
+    </main>
+  </div>
+
+  <div class="bk" id="bk" onclick="closePn(event)">
+    <div class="panel">
+      <div class="pn-hd">
+        <button class="pn-cl" onclick="closePn()"><span class="ms">close</span></button>
+        <div class="pn-chip" id="pnchip">WEEK 01</div>
+        <div class="pn-tt" id="pntt">—</div>
+      </div>
+      <div class="pn-body">
+
+        <div class="pn-days" id="pndays"></div>
+      </div>
+    </div>
+  </div>
+  <div class="mwrap" id="mwrap">
+    <div class="modal">
+      <div class="m-top">
+        <div class="m-wlbl" id="mwlbl" data-i18n="week_complete_title">WEEK 01 COMPLETE</div>
+        <div class="m-title" id="mtt">—</div>
+        <div class="m-sub" id="msub">—</div>
+        <div class="m-stats">
+          <div class="st-cell">
+            <div class="st-n" id="mdays">5/5</div>
+            <div class="st-l" data-i18n="days_done">days done</div>
+          </div>
+          <div class="st-cell">
+            <div class="st-n" id="mtime">—</div>
+            <div class="st-l" data-i18n="total_time_stat">Total Time</div>
+          </div>
+          <div class="st-cell">
+            <div class="st-n" id="mleft">—</div>
+            <div class="st-l" data-i18n="days_early_stat">Days Early</div>
+          </div>
+        </div>
+        <div class="m-days" id="mdaysrow"></div>
+
+        <div class="m-input-box">
+          <div class="m-input-lbl" data-i18n="showcase_work">Showcase your work</div>
+          <input type="text" id="m-video-url" class="m-url-input"
+            data-i18n-placeholder="video_placeholder" placeholder="Paste your YouTube or Vimeo link here">
+        </div>
+
+        <div class="m-next" id="mnext">
+          <div class="m-next-ic"><span class="ms" style="font-size:18px;color:var(--accent);">arrow_forward</span></div>
+          <div>
+            <div class="m-next-lbl" data-i18n="next_week_unlock">Next Week — UNLOCKED!</div>
+            <div class="m-next-tt" id="mnexttt">—</div>
+          </div>
+        </div>
+      </div>
+      <div class="m-btns">
+        <button class="btn-a" id="mbtnsave"><span class="ms" style="font-size:16px;">save</span><span data-i18n="save_work">Save Progress</span></button>
+        <button class="btn-g" onclick="closeSum()"><span class="ms" style="font-size:16px;">close</span><span data-i18n="close_btn">Close</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mwrap" id="authWrap">
+    <div class="modal">
+      <div class="m-top">
+        <div class="m-wlbl">ACCOUNT ACCESS</div>
+        <div class="m-title" data-i18n="login_title">Login / Sign Up</div>
+        <div class="m-sub" data-i18n="login_msg">Your progress will be saved to Supabase</div>
+        <div class="auth-form">
+          <input type="email" id="authEmail" class="auth-input" placeholder="Email Address">
+          <input type="password" id="authPass" class="auth-input" placeholder="Password">
+          <button class="btn-a" id="authSubmit" onclick="handleAuth()"
+            style="width:100%;justify-content:center;">Continue</button>
+          
+          <div class="auth-sep">OR</div>
+          
+          <button class="btn-google" onclick="signInWithGoogle()">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="16" height="16">
+            <span data-i18n="google_login">Sign in with Google</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="np" id="np">
+    <div class="np-hd"><span class="ms" style="font-size:16px;color:var(--accent3)">notifications</span><span
+        class="np-tt" data-i18n="notif_title">Notifications</span><button class="np-cl" onclick="clearN()" data-i18n="clear_all">Clear All</button></div>
+    <div class="np-list" id="nplist"></div>
+  </div>
+  <div class="snackbar" id="snack"></div>
